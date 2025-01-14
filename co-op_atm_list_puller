@@ -1,0 +1,24 @@
+import requests
+
+state_abbreviations=["AL", "AK", "AZ", "AR", "AS", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
+                     "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "TT", "UT", "VT", "VA", "VI", "WA", "WV", "WI", "WY"]
+
+print(len(state_abbreviations))
+
+#https://co-opcreditunions.org/wp-content/themes/coop019901/inc/locator/locator-csv.php?loctype=A&state=AR&statewide=yes&country=&Submit=Search%22
+
+
+#iteration loop to generate url
+for state in state_abbreviations:    
+    try:
+        URL = "https://co-opcreditunions.org/wp-content/themes/coop019901/inc/locator/locator-csv.php?loctype=A&state=" + state + "&statewide=yes&country=&Submit=Search%22"
+        file_saver = "e:/PyProj/coopATMs/" + state + ".csv"
+        resp = requests.get(URL)
+        with open(file_saver, "wb") as f:
+            f.write(resp.content)
+        print (state)
+    except:
+        print ("URL Not Available")
+
+
+print ("Download Finished")
